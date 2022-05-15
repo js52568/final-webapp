@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 //import User from "./User";
 //import UserList from "./UserList";
 //import UserForm from "./UserForm";
@@ -8,11 +8,17 @@ import Home from "./Home";
 import Login from "./Login";
 import Main from "./Main";
 import Register from "./Register";
+import Context from "./Context";
+import { myContext } from "./Context";
 
 //testiram nesto
 //jos jedan test
 
 function App() {
+
+    const userObject = useContext(myContext);
+    console.log(userObject);
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     function onLogin() {
@@ -25,12 +31,12 @@ function App() {
 
     return <div>
         <BrowserRouter>
-            {isLoggedIn && <Header onLogout={onLogout}/>} 
+            {(isLoggedIn || userObject) && <Header onLogout={onLogout}/>} 
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register onLogin={onLogin}/>} />
                 <Route path="/login" element={<Login onLogin={onLogin}/>} />
-                <Route path="/main" element={isLoggedIn && <Main />} />
+                <Route path="/main" element={(isLoggedIn || userObject) && <Main />} />
             </Routes>
         </BrowserRouter>
     </div>

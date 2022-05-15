@@ -99,6 +99,7 @@ app.get("/", function(req,res) {
   
 app.get("/logout", function(req, res){
   req.logout();
+  res.send("done")
   //res.redirect("/");
 });
 
@@ -110,8 +111,12 @@ app.get('/auth/google/main',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000');
+    res.redirect('http://localhost:3000/main');
   }); 
+
+app.get("/getuser", function(req,res) {
+  res.send(req.user);
+})
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
