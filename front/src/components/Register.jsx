@@ -40,6 +40,11 @@ function Register(props) {
     window.open("http://localhost:8080/auth/google","_self");
   }
 
+  function isValid() {
+    const {email, password} = registerForm;
+    return email.length > 0 && password.length > 0;
+  }
+
     return <div class="container mt-5">
     <h1>Register</h1>
   
@@ -57,7 +62,7 @@ function Register(props) {
                 <label for="password">Password</label>
                 <input type="password" className="form-control" name="password" onChange={onChange} value={registerForm.password}/>
               </div>
-              <button type="submit" className="btn btn-dark">Register</button>
+              <button type="submit" className="btn btn-dark" disabled={!isValid()}>Register</button>
             </form>
   
           </div>

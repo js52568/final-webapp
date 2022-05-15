@@ -17,7 +17,6 @@ import { myContext } from "./Context";
 function App() {
 
     const userObject = useContext(myContext);
-    console.log(userObject);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -36,7 +35,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register onLogin={onLogin}/>} />
                 <Route path="/login" element={<Login onLogin={onLogin}/>} />
-                <Route path="/main" element={(isLoggedIn || userObject) && <Main />} />
+                <Route path="/main" element={(isLoggedIn || userObject) && <Main />} />                       
             </Routes>
         </BrowserRouter>
     </div>
