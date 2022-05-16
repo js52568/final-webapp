@@ -10,6 +10,8 @@ import Main from "./Main";
 import Register from "./Register";
 import Context from "./Context";
 import { myContext } from "./Context";
+import NewEvent from "./NewEvent";
+import Profile from "./Profile";
 
 //testiram nesto
 //jos jedan test
@@ -35,7 +37,9 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register onLogin={onLogin}/>} />
                 <Route path="/login" element={<Login onLogin={onLogin}/>} />
-                <Route path="/main" element={(isLoggedIn || userObject) && <Main />} />                       
+                <Route path="/main" element={(isLoggedIn || userObject) && <Main />} />
+                <Route path="/newevent" element={(isLoggedIn || userObject) && <NewEvent />} />
+                <Route path="/profile" element={(isLoggedIn || userObject) && <Profile />} />                       
             </Routes>
         </BrowserRouter>
     </div>
