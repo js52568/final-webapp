@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
+import InputField from "./InputField";
 
 function Register(props) {
   let navigate = useNavigate();
@@ -64,6 +65,7 @@ function Register(props) {
               </div>
               <button type="submit" className="btn btn-dark" disabled={!isValid()}>Register</button>
             </form>
+            <p>{error}</p>
   
           </div>
         </div>
