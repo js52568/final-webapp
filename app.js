@@ -17,6 +17,7 @@ const loginRoute = require('./routes/login.routes');
 const mainpageRoute = require('./routes/mainpage.routes');
 const authGoogleRoute = require('./routes/authgoogle.routes');
 const newEventRoute = require('./routes/newevent.routes');
+const profileRoute = require('./routes/profile.routes');
 
 const app = express();
 
@@ -94,6 +95,7 @@ app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/main', mainpageRoute);
 app.use('/newevent', newEventRoute);
+app.use('/profile',profileRoute);
 //app.use('/auth/google', authGoogleRoute);
 
 app.get("/", function(req,res) {
