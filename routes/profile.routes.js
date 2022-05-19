@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", function(req,res) {
     User.findOne({_id: req.user.id}, function(err, foundUser) {
         if (foundUser) {
-            res.json(foundUser)
+            res.json(foundUser) 
         } else {
             res.json({status: "401"});
         }

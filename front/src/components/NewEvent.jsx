@@ -1,11 +1,24 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import InputField from "./InputField";
 import {useNavigate} from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 function NewEvent() {
     let navigate = useNavigate();
     const [form, setForm] = useState({name:"", sport:"", maxParticipants:1,description:"",startTime:"2022-06-12T19:30",endTime:"2022-06-12T19:30"});
     const [error, setError] = useState("");
+    const [users,setUsers] = useState([]);
+
+    useEffect(() => {
+      fetch("/users").then(data => data.json()).then(users => setUsers(users))
+  }, []);
+
+    let labeledUsers = users.map(user => ({
+      ...user,label: user.username
+    }));
+    console.log(labeledUsers);
 
     function onChange(event) {
         const {name, value} = event.target;

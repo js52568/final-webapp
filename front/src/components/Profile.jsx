@@ -11,7 +11,7 @@ function Profile() {
 
     useEffect(() => {
         fetch("/profile").then(data => data.json()).then(user => setUser(user))
-    });
+    },[]);
     //fetch("/profile").then(data => data.json()).then(user => setUser(user));
 
     function onClick(e) {
@@ -23,6 +23,9 @@ function Profile() {
         const {name, value} = event.target;
         setForm(oldForm => ({
           ...oldForm,[name]: value
+        }))
+        setUser(oldUser => ({
+          ...oldUser,[name]: value
         }))
       }
 
@@ -70,6 +73,7 @@ function Profile() {
                     </div>
                      :
                     <div>
+                        <ProfileItem name="Id" value={user._id}/>
                         <ProfileItem name="Email" value={user.username ? user.username : "Signed in with Google"}/>
                         <ProfileItem name="Nickname" value={user.nickname ? user.nickname : " "}/>
                         <button className="btn btn-light btn-lg" type="submit" onClick={onClick}>Edit profile</button>

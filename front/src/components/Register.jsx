@@ -5,7 +5,7 @@ import InputField from "./InputField";
 function Register(props) {
   let navigate = useNavigate();
 
-  const [registerForm, setRegisterForm] = useState({email: "", password: ""});
+  const [registerForm, setRegisterForm] = useState({email: "", password: "", nickname: ""});
   const [error, setError] = useState("");
 
   function onChange(event) {
@@ -18,7 +18,8 @@ function Register(props) {
     setError("");
     const data = {
       username: registerForm.email,
-      password: registerForm.password
+      password: registerForm.password,
+      nickname:registerForm.nickname
     };
     const options = {
       method: 'POST',
@@ -42,8 +43,8 @@ function Register(props) {
   }
 
   function isValid() {
-    const {email, password} = registerForm;
-    return email.length > 0 && password.length > 0;
+    const {nickname,email, password} = registerForm;
+    return email.length > 0 && password.length > 0 && nickname.length > 0;
   }
 
     return <div class="container mt-5">
@@ -55,6 +56,7 @@ function Register(props) {
           <div className="card-body">
   
             <form onSubmit={onSubmit}>
+              <InputField name="nickname" label="Nickname" type="text" onChange={onChange} value={registerForm.nickname}/>
               <div className="form-group">
                 <label for="email">Email</label>
                 <input type="email" className="form-control" name="email" onChange={onChange} value={registerForm.email}/>

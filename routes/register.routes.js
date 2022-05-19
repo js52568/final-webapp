@@ -19,6 +19,17 @@ router.post("/", function(req,res) {
     } else {
       res.json({status: "200"});
       passport.authenticate("local")(req,res, function(){
+        User.findByIdAndUpdate(req.user.id, { nickname: req.body.nickname },
+          function (err, docs) {
+            if (err){
+            //res.json({status: "401"});
+            console.log(err)
+            }
+            else{
+            //res.json({status: "200"});
+            console.log("Added nickname")
+            }
+            });
         //res.redirect("/main");
       });
     }
