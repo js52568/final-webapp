@@ -10,7 +10,7 @@ function Register(props) {
 
   function onChange(event) {
     const {name, value} = event.target;
-    setRegisterForm(oldForm => ({...oldForm, [name]: value}));
+    setRegisterForm(oldForm => ({...oldForm, [name]: value}));   
   }
 
   function onSubmit(e) {

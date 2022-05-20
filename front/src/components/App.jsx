@@ -12,6 +12,7 @@ import Context from "./Context";
 import { myContext } from "./Context";
 import NewEvent from "./NewEvent";
 import Profile from "./Profile";
+import AddNickname from "./AddNickname";
 
 //testiram nesto
 //jos jedan test
@@ -39,7 +40,8 @@ function App() {
                 <Route path="/login" element={<Login onLogin={onLogin}/>} />
                 <Route path="/main" element={(isLoggedIn || userObject) && <Main />} />
                 <Route path="/newevent" element={(isLoggedIn || userObject) && <NewEvent />} />
-                <Route path="/profile" element={(isLoggedIn || userObject) && <Profile />} />                       
+                <Route path="/profile" element={(isLoggedIn || userObject) && <Profile />} /> 
+                <Route path="/addnickname" element={(isLoggedIn || userObject) && <AddNickname />} />                      
             </Routes>
         </BrowserRouter>
     </div>

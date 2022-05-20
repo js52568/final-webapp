@@ -8,7 +8,7 @@ router.get("/", function(req,res) {
         if (foundUser) {
             res.json(foundUser) 
         } else {
-            res.json({status: "401"});
+            res.status(403).json("403");
         }
     });
 });
@@ -17,7 +17,7 @@ router.post("/edit", function(req,res) {
     User.findByIdAndUpdate(req.user.id, { nickname: req.body.nickname },
                             function (err, docs) {
     if (err){
-        res.json({status: "401"});
+        res.status(403).json("403");
     }
     else{
         res.json({status: "200"});

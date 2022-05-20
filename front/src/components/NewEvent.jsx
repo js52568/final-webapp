@@ -16,9 +16,9 @@ function NewEvent() {
   }, []);
 
     let labeledUsers = users.map(user => ({
-      ...user,label: user.username
+      ...user,label: user.nickname
     }));
-    console.log(labeledUsers);
+    console.log(labeledUsers)
 
     function onChange(event) {
         const {name, value} = event.target;
@@ -75,6 +75,13 @@ function NewEvent() {
                 <InputField name="description" label="Description" type="text" onChange={onChange} value={form.description} size="100"/>
                 <InputField name="startTime" label="Start time" type="datetime-local" onChange={onChange} value={form.startTime}/>
                 <InputField name="endTime" label="End time" type="datetime-local" onChange={onChange} value={form.endTime}/>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={labeledUsers}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => <TextField {...params} label="Add participants" />}
+                />
               
                 <button type="submit" className="btn btn-dark" disabled={!isValid()}>Create</button>          
             </form>
