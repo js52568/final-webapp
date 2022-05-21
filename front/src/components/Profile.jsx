@@ -24,7 +24,7 @@ function Profile() {
         setForm(oldForm => ({
           ...oldForm,[name]: value
         }))
-        setUser(oldUser => ({
+        setUser(oldUser => ({         //ovo mozda treba biti kod submita
           ...oldUser,[name]: value
         }))
       }
