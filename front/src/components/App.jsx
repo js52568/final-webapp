@@ -2,7 +2,7 @@ import React, {useContext, useState} from "react";
 //import User from "./User";
 //import UserList from "./UserList";
 //import UserForm from "./UserForm";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, useParams} from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
 import Login from "./Login";
@@ -15,6 +15,8 @@ import Profile from "./Profile";
 import AddNickname from "./AddNickname";
 import Events from "./Events";
 import Event from "./Event";
+import Users from "./Users";
+import User from "./User";
 
 //testiram nesto
 //jos jedan test
@@ -45,7 +47,9 @@ function App() {
                 <Route path="/profile" element={(isLoggedIn || userObject) && <Profile />} /> 
                 <Route path="/addnickname" element={(isLoggedIn || userObject) && <AddNickname />} />
                 <Route path="/events" element={(isLoggedIn || userObject) && <Events />} />
-                <Route path="/events/{id}" element={(isLoggedIn || userObject) && <Event />} />                      
+                <Route path="/events/:id" element={(isLoggedIn || userObject) && <Event />} />      
+                <Route path="/users" element={(isLoggedIn || userObject) && <Users />} /> 
+                <Route path="/users/:id" element={(isLoggedIn || userObject) && <User />} />               
             </Routes>
         </BrowserRouter>
     </div>

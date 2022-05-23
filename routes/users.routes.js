@@ -9,6 +9,14 @@ router.get("/", function(req,res) {
     });
 });
 
-
+router.get("/:id", function(req,res){
+    User.findOne({_id: req.params.id}, function(err,foundUser){
+        if (foundUser) {
+            res.json(foundUser);
+        } else {
+            console.log(err);
+        }
+    })
+})
 
 module.exports = router;

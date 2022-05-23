@@ -9,12 +9,14 @@ const userSchema = new mongoose.Schema({
   password: String,
   googleId: String,
   description: String,
+  picture: String,
   friendsIds: [String],
   invitationsIds: [String],    
   ratingIds: [String],        
   friendRequestsIds: [String], 
   cancelationsIds: [String],
-  eventsIds: [String]  
+  eventsIds: [String],
+  hostedEventsIds: [String]  
 });
 
 userSchema.plugin(passportLocalMongoose);

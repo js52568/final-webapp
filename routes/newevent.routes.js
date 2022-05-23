@@ -5,7 +5,7 @@ const User = require("./../schemas/UserSchema.js");
 const router = express.Router();
 
 router.post("/", function(req,res) {
-    console.log(req.user.id);
+    const participants = [...req.body.participantsIds,req.body.host]        //nesto ne stima
     const newEvent = new Event({
         name: req.body.name,
         sport: req.body.sport,
@@ -13,7 +13,8 @@ router.post("/", function(req,res) {
         description: req.body.description,
         startTime: req.body.startTime,
         endTime: req.body.endTime,
-        host: req.user.id
+        host: req.user.id,
+        participantsIds: participants
     });
     newEvent.save(function(err,event){
         let newId = event._id;

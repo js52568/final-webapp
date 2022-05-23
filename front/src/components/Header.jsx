@@ -11,6 +11,8 @@ function Header(props) {
           <LogoutButton onLogout={onLogout}/>
           <Link to="/newevent" className="btn btn-light btn-lg">New Event</Link>
           <Link to="/profile" className="btn btn-light btn-lg">Profile</Link>  
+          <Link to="/events" className="btn btn-light btn-lg">Events</Link>
+          <Link to="/users" className="btn btn-light btn-lg">Users</Link>
         </header>
     )
 }

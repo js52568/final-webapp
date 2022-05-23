@@ -4,8 +4,20 @@ const User = require("./../schemas/UserSchema.js");
 
 const router = express.Router();
 
+router.get("/", function(req,res){
+    Event.find(function(err,foundEvents){
+        res.json(foundEvents);
+    });
+});
+
 router.get("/:id", function(req,res){
-    console.log(req.params.id);
+    Event.findOne({_id: req.params.id}, function(err,foundEvent){
+        if (foundEvent) {
+            res.json(foundEvent);
+        } else {
+            console.log(err);
+        }
+    })
 })
 
 module.exports = router;
