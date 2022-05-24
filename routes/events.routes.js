@@ -20,4 +20,21 @@ router.get("/:id", function(req,res){
     })
 })
 
+router.get("/:id/participants", function(req,res){
+    Event.findOne({_id: req.params.id}, function(err,foundEvent){
+        if (foundEvent) {
+            let participantsIds = foundEvent.participantsIds;
+            User.find({_id: { $in: participantsIds }}, function(err,foundUsers){
+                if (foundUsers) {
+                    res.json(foundUsers);
+                } else {
+                    console.log(err);
+                }
+            })
+        } else {
+            console.log(err);
+        }
+    })
+})
+
 module.exports = router;
