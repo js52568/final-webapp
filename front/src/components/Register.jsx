@@ -31,7 +31,7 @@ function Register(props) {
     fetch("/register", options).then(res => {
       if (res.status === 200) {
         props.onLogin();
-        navigate("/main");
+        navigate("/login");
       } else {
         setError("Register failed");
       }

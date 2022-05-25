@@ -18,7 +18,7 @@ function NewEvent() {
     let labeledUsers = users.map(user => ({
       ...user,label: user.nickname
     }));
-    console.log(labeledUsers)
+    //console.log(labeledUsers)
 
     function onChange(event) {
         const {name, value} = event.target;
@@ -78,7 +78,7 @@ function NewEvent() {
                 <Autocomplete
                   disablePortal
                   id="combo-box-demo"
-                  options={labeledUsers}
+                  options={labeledUsers || ""}
                   sx={{ width: 300 }}
                   renderInput={(params) => <TextField {...params} label="Add participants" />}
                 />
