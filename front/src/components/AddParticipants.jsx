@@ -6,38 +6,40 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
-function AddParticipants(props) {               //rijesiti dodavanje ovoga, predati u event
+function AddParticipants(props) {
+  
+    const [nick,setNick] = useState();
 
-    function onSubmit () {
-                       
-    }
 
     function onChange(value) {
-        
+      setNick(value);  
     }
 
-    function add () {}
+    function onClick() {
+      props.onClick(nick);
+    }
+    
 
     function isValid () {
-        props.isValid();
+      return !(nick == null) && props.isValid(nick);
     }
 
-    function cancelAdd() {}
+    function cancelAdd() {
+      props.cancelAdd();
+    }
 
     return (
     <div>
-    <form onSubmit={onSubmit}>
     <Autocomplete
-    onChange={(event, value) => {onChange(value)}}
+    onChange={(event, value) => onChange(value)}
     disablePortal
     id="combo-box-demo"
     options={props.users || ""}
     sx={{ width: 300 }}
     renderInput={(params) => <TextField {...params} label="Add participants" />}
   />
-  <Fab onClick={add} disabled={!isValid} color="primary" aria-label="add"><AddIcon /></Fab>
-  </form> 
-  <button className="btn btn-light btn-lg" onClick={cancelAdd}>Cancel</button>
+  <Fab onClick={onClick} disabled={!isValid()} color="primary" aria-label="add"><AddIcon /></Fab> 
+  <button className="btn btn-light btn-lg" onClick={cancelAdd}>Finish</button>
   </div>
   )
 

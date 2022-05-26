@@ -37,4 +37,21 @@ router.get("/:id/participants", function(req,res){
     })
 })
 
+router.post("/:id/participants", function(req,res){
+    //rijesiti ovo s participantsIds
+    Event.findByIdAndUpdate(req.params.id, { participantsIds: [...participantsIds,req.body] }, function(err,foundEvent) {
+        if (err) {
+            res.status(403).json("403");
+        } else {
+            User.findByIdAndUpdate(req.body._id, { eventsIds: [...eventsIds,req.params.id] }, function(err,foundUser) {
+                if (err){
+                    res.status(403).json("403");  
+                } else {
+                    res.json({status: "200"});
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;

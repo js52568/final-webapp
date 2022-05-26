@@ -23,7 +23,7 @@ function Event(){
     let labeledUsers = users.map(user => ({
         ...user,label: user.nickname
       }));
-      console.log(labeledUsers);
+      //console.log(labeledUsers);
 
     useEffect(() => {        
         fetch(myUrl).then(data => data.json()).then(event => setEvent(event))       
@@ -74,9 +74,24 @@ function Event(){
         setAddParticipants(false);
     }
 
-    function add() {}
-
-    function onSubmit() {}
+    function add(nick) {
+        setParticipants(oldPart => [...oldPart,nick]);
+        const data = nick;
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          };
+          fetch(myUrl + "/participants", options).then(res => {
+            if (res.status === 200) {
+              console.log("Success");
+            } else {
+              console.log("Participants add failed");
+            }
+          });     
+    }
 
     function cancelEvent(){}
 
@@ -84,8 +99,13 @@ function Event(){
 
     function joinEvent() {}
 
-    function isValid() {
+    function isValidTry() {
         return true;
+    }
+
+    function isValidAdd(nick) {
+        let partNicknames = participants.map(part => part.nickname);
+        return !(partNicknames.includes(nick.nickname));
     }
 
     return (
@@ -105,9 +125,9 @@ function Event(){
         </div>
         )}         
         {(role === "host" && addParticipants === false) && 
-        <button className="btn btn-light btn-lg" onClick={addParticipant} disabled={!isValid()}>Add participants</button>}        
+        <button className="btn btn-light btn-lg" onClick={addParticipant} disabled={!isValidTry()}>Add participants</button>}        
         {addParticipants === true &&      
-        <AddParticipants users={labeledUsers} />
+        <AddParticipants users={labeledUsers} isValid={(nick) => isValidAdd(nick)} cancelAdd={cancelAdd} onClick={(nick) => add(nick)}/>
         } 
         <p>Capacity: {participants.length}/{event.maxParticipants}</p>     
         <p>Activity: {activity}</p>  
