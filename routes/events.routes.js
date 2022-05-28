@@ -39,11 +39,11 @@ router.get("/:id/participants", function(req,res){
 
 router.post("/:id/participants", function(req,res){
     //rijesiti ovo s participantsIds
-    Event.findByIdAndUpdate(req.params.id, { participantsIds: [...participantsIds,req.body] }, function(err,foundEvent) {
+    Event.findByIdAndUpdate(req.params.id, { $push: { participantsIds: req.body }}, function(err,foundEvent) {
         if (err) {
             res.status(403).json("403");
         } else {
-            User.findByIdAndUpdate(req.body._id, { eventsIds: [...eventsIds,req.params.id] }, function(err,foundUser) {
+            User.findByIdAndUpdate(req.body._id, { $push: {eventsIds: req.params.id} }, function(err,foundUser) {
                 if (err){
                     res.status(403).json("403");  
                 } else {

@@ -57,7 +57,7 @@ router.post("/nickname", function(req,res) {
           else{
             res.status(200).json("200");
           //res.json({status: "200"});
-          console.log("Added nickname")
+          //console.log("Added nickname")
           }
           });
     }});

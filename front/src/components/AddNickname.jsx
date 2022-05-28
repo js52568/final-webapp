@@ -51,7 +51,7 @@ function AddNickname(props) {
   
             <form onSubmit={onSubmit}>
               <InputField name="nickname" label="Nickname" type="text" onChange={onChange} value={nickForm.nickname}/>
-              <button type="submit" className="btn btn-dark" disabled={!isValid()}>Register</button>
+              <button type="submit" className="btn btn-dark" disabled={!isValid()}>Add</button>
             </form>
             <p>{error}</p>
   

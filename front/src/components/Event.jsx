@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddParticipants from "./AddParticipants";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import StarIcon from '@mui/icons-material/Star';
 
 function Event(){
     let navigate = useNavigate();
@@ -58,13 +59,17 @@ function Event(){
         activity = "Live";
     }
 
-    let role = "not-participating"
-    if (user._id === event.host) {
-        role = "host";
-    }
-    else if (user.nickname in participants && user._id !== event.host) {
+    let role = "";
+  
+  if (user._id === event.host) {
+      role = "host";
+  }
+  else if (event.participantsIds.includes(user._id) && user._id !== event.host) {
         role = "participant";
     }
+  else {
+    role = "not-participating";
+  }
 
     function addParticipant(){
         setAddParticipants(true);
@@ -100,7 +105,7 @@ function Event(){
     function joinEvent() {}
 
     function isValidTry() {
-        return true;
+        return participants.length < event.maxParticipants;
     }
 
     function isValidAdd(nick) {
@@ -119,9 +124,10 @@ function Event(){
         {participants.map((user) => 
         <div>
         <p onClick={() => toUser(user._id)}>{user.nickname}</p>
-        {role === "host" && <Button className="btn btn-light btn-lg" variant="outlined" startIcon={<DeleteIcon />}>
+        {(role === "host" && event.host !== user._id) && <Button className="btn btn-light btn-lg" variant="outlined" startIcon={<DeleteIcon />}>
         Remove
       </Button>}
+      {event.host === user._id && <StarIcon/>}
         </div>
         )}         
         {(role === "host" && addParticipants === false) && 

@@ -119,8 +119,13 @@ app.get("/auth/google",
 app.get('/auth/google/main',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
+    if(req.user.nickname) {
+      res.redirect('http://localhost:3000/main');
+    } else {
+      res.redirect('http://localhost:3000/addnickname');
+    }
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/addnickname');
+    
   }); 
 
 app.get("/getuser", function(req,res) {
