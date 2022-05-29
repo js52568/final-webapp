@@ -47,11 +47,27 @@ router.post("/:id/participants", function(req,res){
                 if (err){
                     res.status(403).json("403");  
                 } else {
-                    res.json({status: "200"});
+                    res.status(200).json("200");
                 }
             });
         }
     });
+});
+
+router.post("/:id/removeParticipant", function(req,res) {
+    Event.findByIdAndUpdate(req.params.id, {participantsIds: req.body.newParticipantsIds}, function(err,foundEvent){
+        if(err){
+            res.status(403).json("403");
+        } else {
+            User.findByIdAndUpdate(req.body.userId, { $pull: { eventsIds: req.params.id }}, function(err,foundUser){
+                if (err){
+                res.status(403).json("403");
+                } else {
+                    res.status(200).json("200");
+                }
+            })
+        }
+    })
 });
 
 module.exports = router;

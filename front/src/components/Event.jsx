@@ -46,6 +46,8 @@ function Event(){
         fetch("/users").then(data => data.json()).then(users => setUsers(users))
     }, []);
 
+
+
     const currentDate = new Date();
     const startTime = new Date(event.startTime);
     const endTime = new Date(event.endTime);
@@ -58,11 +60,10 @@ function Event(){
     } else {
         activity = "Live";
     }
-
     let role = "";
   
   if (user._id === event.host) {
-      role = "host";
+    role = "host";
   }
   else if (event.participantsIds.includes(user._id) && user._id !== event.host) {
         role = "participant";
@@ -98,11 +99,35 @@ function Event(){
           });     
     }
 
+    function removePart(id) {
+      let newParticipants = participants.filter(part => part._id !== id);
+      setParticipants(newParticipants);
+      let newParticipantsIds = newParticipants.map(part => part._id);
+      const data = {
+        newParticipantsIds: newParticipantsIds,
+        userId: id
+      };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      fetch(myUrl + "/removeParticipant", options).then(res => {
+        if (res.status === 200) {
+          console.log("Success");
+        } else {
+          console.log("Remove participant failed");
+        }
+      });     
+    }
+
     function cancelEvent(){}
 
-    function cancelParticipation() {}
+    //function cancelParticipation() {}
 
-    function joinEvent() {}
+    //function joinEvent() {}
 
     function isValidTry() {
         return participants.length < event.maxParticipants;
@@ -121,13 +146,14 @@ function Event(){
         <p>Sport: {event.sport}</p>
         <p>Description: {event.description}</p>
         <label>Participants:</label>
-        {participants.map((user) => 
+        {participants.map((part) => 
         <div>
-        <p onClick={() => toUser(user._id)}>{user.nickname}</p>
-        {(role === "host" && event.host !== user._id) && <Button className="btn btn-light btn-lg" variant="outlined" startIcon={<DeleteIcon />}>
+        <p onClick={() => toUser(part._id)}>{part.nickname}</p>
+        {(role === "host" && event.host !== part._id) && <Button onClick={() => removePart(part._id)} 
+        className="btn btn-light btn-lg" variant="outlined" startIcon={<DeleteIcon />}>
         Remove
       </Button>}
-      {event.host === user._id && <StarIcon/>}
+      {event.host === part._id && <StarIcon/>}
         </div>
         )}         
         {(role === "host" && addParticipants === false) && 
@@ -138,8 +164,8 @@ function Event(){
         <p>Capacity: {participants.length}/{event.maxParticipants}</p>     
         <p>Activity: {activity}</p>  
         {role === "host" && <button className="btn btn-light btn-lg" onClick={cancelEvent}>Cancel event</button>} 
-        {role === "participant" && <button className="btn btn-light btn-lg" onClick={cancelParticipation}>Cancel</button>}
-        {role === "not-participating" && <button className="btn btn-light btn-lg" onClick={joinEvent}>Join</button>}
+        {role === "participant" && <button className="btn btn-light btn-lg" onClick={() => removePart(user._id)}>Cancel</button>}
+        {role === "not-participating" && <button className="btn btn-light btn-lg" onClick={() => add(user)}>Join</button>}
       
     </div>
   </div>

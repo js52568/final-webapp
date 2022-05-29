@@ -2,9 +2,9 @@ import React from "react";
 
 function Participant(props) {
 
-    /* return (
+   /*  return (
         <div>
-        <p onClick={() => toUser(user._id)}>{user.nickname}</p>
+        <p onClick={props.onClick}>{user.nickname}</p>
         {(role === "host" && event.host !== user._id) && <Button className="btn btn-light btn-lg" variant="outlined" startIcon={<DeleteIcon />}>
         Remove
       </Button>}
