@@ -61,18 +61,17 @@ function Event(){
         activity = "Live";
     }
   
-  let role = "";
-
-  if (user._id === event.host) {
-    role = "host";
-  }
-  else if (event.participantsIds.includes(user._id) && user._id !== event.host) {
-        role = "participant";
+    let role = "";
+    if (user._id === event.host) {
+      role = "host";
     }
-  else {
-    role = "not-participating";
-  }
-
+    else if (event.participantsIds.includes(user._id) && user._id !== event.host) {
+          role = "participant";
+      }
+    else {
+      role = "not-participating";
+    }
+  
     function addParticipant(){
         setAddParticipants(true);
     }
@@ -97,7 +96,10 @@ function Event(){
             } else {
               console.log("Participants add failed");
             }
-          });     
+          });
+        if (user._id === nick._id){
+          window.open("http://localhost:3000" + myUrl,"_self");     //ruzan nacin
+        }
     }
 
     function removePart(id) {
@@ -121,7 +123,11 @@ function Event(){
         } else {
           console.log("Remove participant failed");
         }
-      });     
+      });
+      if (id === user._id){
+        window.open("http://localhost:3000" + myUrl,"_self");   //ruzan nacin
+      }
+
     }
 
     function cancelEvent(){}
