@@ -60,8 +60,9 @@ function Event(){
     } else {
         activity = "Live";
     }
-    let role = "";
   
+  let role = "";
+
   if (user._id === event.host) {
     role = "host";
   }
@@ -138,6 +139,10 @@ function Event(){
         return !(partNicknames.includes(nick.nickname));
     }
 
+    function isFull() {
+      return participants.length >= event.maxParticipants;
+    }
+
     return (
         <div class="jumbotron centered">
     <div className="container">
@@ -165,7 +170,7 @@ function Event(){
         <p>Activity: {activity}</p>  
         {role === "host" && <button className="btn btn-light btn-lg" onClick={cancelEvent}>Cancel event</button>} 
         {role === "participant" && <button className="btn btn-light btn-lg" onClick={() => removePart(user._id)}>Cancel</button>}
-        {role === "not-participating" && <button className="btn btn-light btn-lg" onClick={() => add(user)}>Join</button>}
+        {role === "not-participating" && <button disabled={isFull()} className="btn btn-light btn-lg" onClick={() => add(user)}>Join</button>}
       
     </div>
   </div>
