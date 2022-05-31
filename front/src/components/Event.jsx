@@ -14,6 +14,8 @@ function Event(){
     const [user,setUser] = useState({});
     const [addParticipants, setAddParticipants] = useState(false);
     const [users,setUsers] = useState([]);
+    const [role,setRole] = useState("");
+    const [activity,setActivity] = useState("");
     //const [currId,setCurrId] = useState("");
 
     
@@ -21,14 +23,20 @@ function Event(){
     //setCurrId(id);
     let myUrl = "/events/" + id;
 
-    let labeledUsers = users.map(user => ({
+    function getLabels() {
+      let labeledUsers = users.map(user => ({
         ...user,label: user.nickname
       }));
+      return labeledUsers;
+    }
+    /* let labeledUsers = users.map(user => ({
+        ...user,label: user.nickname
+      })); */
       //console.log(labeledUsers);
 
     useEffect(() => {        
-        fetch(myUrl).then(data => data.json()).then(event => setEvent(event))       
-    }, []);
+        fetch(myUrl).then(data => data.json()).then(event => setEvent(event));     
+    }, []); 
 
     useEffect(() => {        
         fetch(myUrl + "/participants").then(data => data.json()).then(participants => setParticipants(participants))       
@@ -46,9 +54,16 @@ function Event(){
         fetch("/users").then(data => data.json()).then(users => setUsers(users))
     }, []);
 
+    useEffect(() => {
+        fetch(myUrl + "/getRole").then(data => data.json()).then(role => setRole(role.role));
+    }, []);
 
+    useEffect(() => {
+      fetch(myUrl + "/getActivity").then(data => data.json()).then(activity => setActivity(activity.activity));
+  }, []);
 
-    const currentDate = new Date();
+    //let activity = "Not working yet"    //take care of it
+    /* const currentDate = new Date();
     const startTime = new Date(event.startTime);
     const endTime = new Date(event.endTime);
     let activity = "";
@@ -59,18 +74,7 @@ function Event(){
         activity = "Ended";
     } else {
         activity = "Live";
-    }
-  
-    let role = "";
-    if (user._id === event.host) {
-      role = "host";
-    }
-    else if (event.participantsIds.includes(user._id) && user._id !== event.host) {
-          role = "participant";
-      }
-    else {
-      role = "not-participating";
-    }
+    } */
   
     function addParticipant(){
         setAddParticipants(true);
@@ -98,7 +102,8 @@ function Event(){
             }
           });
         if (user._id === nick._id){
-          window.open("http://localhost:3000" + myUrl,"_self");     //ruzan nacin
+          setRole("participant");
+          //window.open("http://localhost:3000" + myUrl,"_self");     //ruzan nacin, zamijeniti role
         }
     }
 
@@ -125,7 +130,8 @@ function Event(){
         }
       });
       if (id === user._id){
-        window.open("http://localhost:3000" + myUrl,"_self");   //ruzan nacin
+        setRole("not-participating");
+        //window.open("http://localhost:3000" + myUrl,"_self");   //ruzan nacin
       }
 
     }
@@ -149,8 +155,9 @@ function Event(){
       return participants.length >= event.maxParticipants;
     }
 
-    return (
-        <div class="jumbotron centered">
+
+    return ( 
+    <div class="jumbotron centered">
     <div className="container">
       <h1>{event.name}</h1>
         <p>{event._id}</p>
@@ -170,7 +177,7 @@ function Event(){
         {(role === "host" && addParticipants === false) && 
         <button className="btn btn-light btn-lg" onClick={addParticipant} disabled={!isValidTry()}>Add participants</button>}        
         {addParticipants === true &&      
-        <AddParticipants users={labeledUsers} isValid={(nick) => isValidAdd(nick)} cancelAdd={cancelAdd} onClick={(nick) => add(nick)}/>
+        <AddParticipants users={getLabels()} isValid={(nick) => isValidAdd(nick)} cancelAdd={cancelAdd} onClick={(nick) => add(nick)}/>
         } 
         <p>Capacity: {participants.length}/{event.maxParticipants}</p>     
         <p>Activity: {activity}</p>  

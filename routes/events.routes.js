@@ -70,4 +70,42 @@ router.post("/:id/removeParticipant", function(req,res) {
     })
 });
 
+router.get("/:id/getRole", function(req,res){
+    Event.findOne({_id: req.params.id}, function(err,foundEvent){
+        if (foundEvent) {
+            if (foundEvent.host === req.user.id){
+                res.json({role: "host"}); 
+            }
+            else if (foundEvent.participantsIds.includes(req.user._id) && foundEvent.host !== req.user._id) {
+                res.json({role: "participant"});
+            }
+            else {
+                res.json({role: "not-participating"});   
+            }
+        } else {
+            res.status(403).json("not found"); 
+        }
+    });
+});
+
+router.get("/:id/getActivity", function(req,res){
+    Event.findOne({_id: req.params.id}, function(err,foundEvent){
+        if (foundEvent){
+            const currentDate = new Date();
+            const startTime = new Date(foundEvent.startTime);
+            const endTime = new Date(foundEvent.endTime);
+            let activity = "";
+            if (currentDate < startTime) {
+                activity = "Upcoming";
+            }  
+            else if  (currentDate > endTime) {
+                activity = "Ended";
+            } else {
+                activity = "Live";
+                }
+            res.json({activity: activity});
+            }
+    });
+});
+
 module.exports = router;
