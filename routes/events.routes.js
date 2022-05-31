@@ -108,4 +108,24 @@ router.get("/:id/getActivity", function(req,res){
     });
 });
 
+router.post("/:id/cancelEvent", function(req,res) {
+    const participants = req.body.participants;
+    Event.deleteOne({_id: req.params.id}, function(err,foundEvent){
+        if (err) {
+            res.status(404).json("failed"); 
+        } else {
+            participants.forEach(id => {
+                User.findByIdAndUpdate(id, { $pull: { eventsIds: req.params.id }}, function(err,foundUser){
+                    if (err) {
+                        res.status(404).json("failed");
+                    } else {
+                        console.log("ok");
+                    }
+                });
+            });
+            res.status(200).json("200");
+        }
+    });
+});
+
 module.exports = router;

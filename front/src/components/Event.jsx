@@ -136,7 +136,26 @@ function Event(){
 
     }
 
-    function cancelEvent(){}
+    function cancelEvent(){
+      const data = {
+        participants: participants
+      };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      fetch(myUrl + "/cancelEvent", options).then(res => {
+        if (res.status === 200) {
+          console.log("Success");
+          navigate("/events");
+        } else {
+          console.log("Cancel event failed");
+        }
+      });
+    }
 
     //function cancelParticipation() {}
 
