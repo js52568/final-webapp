@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import EventComponent from "./EventComponent";
 
-function Events(props){
+function MyEvents(props){
     const [events,setEvents] = useState([]);
 
     useEffect(() => {
-        fetch("/events").then(data => data.json()).then(events => setEvents(events))
+        fetch("events/myevents").then(data => data.json()).then(events => setEvents(events))
     }, []);
+    console.log(events);
 
     return <div>
     <h1>Events</h1>
@@ -15,4 +16,4 @@ function Events(props){
 
 }
 
-export default Events;
+export default MyEvents;

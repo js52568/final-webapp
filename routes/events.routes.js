@@ -10,6 +10,20 @@ router.get("/", function(req,res){
     });
 });
 
+router.get("/explore", function(req,res){
+    Event.find(function(err,foundEvents){
+        const exploreEvents = foundEvents.filter(event => (event.host !== req.user.id));
+        res.json(exploreEvents);
+    });
+});
+
+router.get("/myevents", function(req,res){
+    Event.find(function(err,foundEvents){
+        const exploreEvents = foundEvents.filter(event => (event.host === req.user.id || event.participantsIds.includes(req.user.id)));
+        res.json(exploreEvents);
+    });
+});
+
 router.get("/:id", function(req,res){
     Event.findOne({_id: req.params.id}, function(err,foundEvent){
         if (foundEvent) {

@@ -130,7 +130,7 @@ function Event(){
         }
       });
       if (id === user._id){
-        setRole("not-participating");
+        setRole("not-participating");                                                 //dodati redirect na nesto
         //window.open("http://localhost:3000" + myUrl,"_self");   //ruzan nacin
       }
 

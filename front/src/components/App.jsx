@@ -17,6 +17,7 @@ import Events from "./Events";
 import Event from "./Event";
 import Users from "./Users";
 import User from "./User";
+import MyEvents from "./MyEvents";
 
 //testiram nesto
 //jos jedan test
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/profile" element={(isLoggedIn || userObject) && <Profile />} /> 
                 <Route path="/addnickname" element={(isLoggedIn || userObject) && <AddNickname />} />
                 <Route path="/events" element={(isLoggedIn || userObject) && <Events />} />
+                <Route path="/myevents" element={(isLoggedIn || userObject) && <MyEvents />} />
                 <Route path="/events/:id" element={(isLoggedIn || userObject) && <Event />} />      
                 <Route path="/users" element={(isLoggedIn || userObject) && <Users />} /> 
                 <Route path="/users/:id" element={(isLoggedIn || userObject) && <User />} />               
