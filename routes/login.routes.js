@@ -18,7 +18,7 @@ router.post("/", function(req,res) {
   
     req.login(user, function(err){
       if(err){
-        res.status(403).json("403");
+        res.json({status: "401"});
         console.log("Email or password incorrect!");
       } else {
         passport.authenticate("local")(req,res,function(){
