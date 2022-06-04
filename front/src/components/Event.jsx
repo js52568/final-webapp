@@ -130,7 +130,7 @@ function Event(){
         }
       });
       if (id === user._id){
-        setRole("not-participating");                                                 //dodati redirect na nesto
+        setRole("not-participating");                                                 
         //window.open("http://localhost:3000" + myUrl,"_self");   //ruzan nacin
       }
 
@@ -150,7 +150,7 @@ function Event(){
       fetch(myUrl + "/cancelEvent", options).then(res => {
         if (res.status === 200) {
           console.log("Success");
-          navigate("/events");
+          navigate("/main");
         } else {
           console.log("Cancel event failed");
         }

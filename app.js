@@ -41,7 +41,8 @@ app.use(session({
   app.use(passport.initialize());
   app.use(passport.session());
   
-mongoose.connect("mongodb://localhost:27017/testSportsDB", {useNewUrlParser: true});
+//mongoose.connect("mongodb://localhost:27017/testSportsDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://admin-realJura:k2ksnD3oR3YJPWMv@cluster0.v2w3f.mongodb.net/sportsDB", {useNewUrlParser: true});
 
 /* const users = [
     {name: "Jura", username:"jura"},
