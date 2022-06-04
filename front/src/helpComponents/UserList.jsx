@@ -9,6 +9,7 @@ function UserList() {
     useEffect(() => {
         fetch("/users").then(data => data.json()).then(users => setUsers(users))
     }, []);
+
     
     return <div>
     {users.map((user,index) => <User key={index} name={user.name} username={user.username}/>)}

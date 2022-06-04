@@ -5,15 +5,18 @@ const findOrCreate = require('mongoose-findorcreate');
 const userSchema = new mongoose.Schema({
   fullName: String,
   username: String,
+  nickname: String,
   password: String,
   googleId: String,
   description: String,
+  picture: String,
   friendsIds: [String],
   invitationsIds: [String],    
   ratingIds: [String],        
   friendRequestsIds: [String], 
   cancelationsIds: [String],
-  eventsIds: [String]  
+  eventsIds: [String],
+  hostedEventsIds: [String]  
 });
 
 userSchema.plugin(passportLocalMongoose);
