@@ -33,18 +33,13 @@ function Login(props) {
         props.onLogin();
         navigate("/main");
       } else {
-        setError("Login failed");
+        setError("Register failed");
       }
     });
   }
 
   function onClick() {
     window.open("http://localhost:8080/auth/google","_self");
-  }
-
-  function isValid() {
-    const {email, password} = loginForm;
-    return email.length > 0 && password.length > 0;
   }
 
     return <div className="container mt-5">
@@ -64,9 +59,8 @@ function Login(props) {
                 <label for="password">Password</label>
                 <input type="password" className="form-control" name="password" onChange={onChange} value={loginForm.password}/>
               </div>
-              <button type="submit" className="btn btn-dark" disabled={!isValid()}>Login</button>          
+              <button type="submit" className="btn btn-dark">Login</button>
             </form>
-            <p>{error}</p>
   
           </div>
         </div>

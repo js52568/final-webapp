@@ -1,12 +1,10 @@
-const mongoose = require("mongoose");
-
 const EventSchema = {
   name: String,
   sport: String,
-  maxParticipants: Number,
+  minParticipants: Number,
   host: String,
-  activity: String,               //je li bio ili ce biti ili u tijeku
-  success: String,                // je li uspio? tj je li odrzan
+  activity: String,
+  success: String,
   description: String,
   price: Number,
   ratingsIds: [Number],        
@@ -18,6 +16,4 @@ const EventSchema = {
   participantsIds: [String]
 };
 
-const Event = new mongoose.model("Event",EventSchema);
-
-module.exports = Event;
+module.exports = EventSchema;

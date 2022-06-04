@@ -16,10 +16,6 @@ const registerRoute = require('./routes/register.routes');
 const loginRoute = require('./routes/login.routes');
 const mainpageRoute = require('./routes/mainpage.routes');
 const authGoogleRoute = require('./routes/authgoogle.routes');
-const newEventRoute = require('./routes/newevent.routes');
-const profileRoute = require('./routes/profile.routes');
-const usersRoute = require('./routes/users.routes');
-const eventsRoute = require('./routes/events.routes');
 
 const app = express();
 
@@ -73,8 +69,7 @@ passport.serializeUser(function(user,done) {
 
 passport.deserializeUser(function(id,done) {
   User.findById(id, function(err,user) {
-      // if (err) return done(err);
-      done(err,user);
+      done(err,user.id);
   });
 });
 
@@ -96,10 +91,6 @@ function(accessToken, refreshToken, profile, cb) {
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/main', mainpageRoute);
-app.use('/newevent', newEventRoute);
-app.use('/profile',profileRoute);
-app.use('/users',usersRoute);
-app.use('/events',eventsRoute);
 //app.use('/auth/google', authGoogleRoute);
 
 app.get("/", function(req,res) {
@@ -108,7 +99,6 @@ app.get("/", function(req,res) {
   
 app.get("/logout", function(req, res){
   req.logout();
-  res.send("done")
   //res.redirect("/");
 });
 
@@ -119,18 +109,9 @@ app.get("/auth/google",
 app.get('/auth/google/main',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    if(req.user.nickname) {
-      res.redirect('http://localhost:3000/main');
-    } else {
-      res.redirect('http://localhost:3000/addnickname');
-    }
     // Successful authentication, redirect home.
-    
+    res.redirect('http://localhost:3000');
   }); 
-
-app.get("/getuser", function(req,res) {
-  res.send(req.user);
-})
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

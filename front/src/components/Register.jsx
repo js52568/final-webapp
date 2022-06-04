@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
-import InputField from "./InputField";
 
 function Register(props) {
   let navigate = useNavigate();
 
-  const [registerForm, setRegisterForm] = useState({email: "", password: "", nickname: ""});
+  const [registerForm, setRegisterForm] = useState({email: "", password: ""});
   const [error, setError] = useState("");
 
   function onChange(event) {
     const {name, value} = event.target;
-    setRegisterForm(oldForm => ({...oldForm, [name]: value}));   
+    setRegisterForm(oldForm => ({...oldForm, [name]: value}));
   }
 
   function onSubmit(e) {
@@ -18,8 +17,7 @@ function Register(props) {
     setError("");
     const data = {
       username: registerForm.email,
-      password: registerForm.password,
-      nickname:registerForm.nickname
+      password: registerForm.password
     };
     const options = {
       method: 'POST',
@@ -30,8 +28,8 @@ function Register(props) {
     };
     fetch("/register", options).then(res => {
       if (res.status === 200) {
-        //props.onLogin();
-        navigate("/login");
+        props.onLogin();
+        navigate("/main");
       } else {
         setError("Register failed");
       }
@@ -40,11 +38,6 @@ function Register(props) {
 
   function onClick() {
     window.open("http://localhost:8080/auth/google","_self");
-  }
-
-  function isValid() {
-    const {nickname,email, password} = registerForm;
-    return email.length > 0 && password.length > 0 && nickname.length > 0;
   }
 
     return <div class="container mt-5">
@@ -56,7 +49,6 @@ function Register(props) {
           <div className="card-body">
   
             <form onSubmit={onSubmit}>
-              <InputField name="nickname" label="Nickname" type="text" onChange={onChange} value={registerForm.nickname}/>
               <div className="form-group">
                 <label for="email">Email</label>
                 <input type="email" className="form-control" name="email" onChange={onChange} value={registerForm.email}/>
@@ -65,9 +57,8 @@ function Register(props) {
                 <label for="password">Password</label>
                 <input type="password" className="form-control" name="password" onChange={onChange} value={registerForm.password}/>
               </div>
-              <button type="submit" className="btn btn-dark" disabled={!isValid()}>Register</button>
+              <button type="submit" className="btn btn-dark">Register</button>
             </form>
-            <p>{error}</p>
   
           </div>
         </div>
