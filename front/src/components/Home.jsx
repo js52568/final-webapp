@@ -14,8 +14,7 @@ function Home() {
 
     return  (<div class="jumbotron centered">
     <div className="container">
-      <i className="fas fa-key fa-6x"></i>
-      <h1 className="display-3">Sporting Events</h1>
+      <h1 className="display-3">SportEve</h1>
       <p className="lead">Find new teammates!</p>
       <hr/>
       <button className="btn btn-light btn-lg" onClick={handleRegister} type="submit">Register</button>
