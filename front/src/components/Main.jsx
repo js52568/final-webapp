@@ -11,7 +11,6 @@ function Main() {
 
     return <div class="jumbotron text-center">
     <div className="container">
-      <i className="fas fa-key fa-6x"></i>
       <h1 className="display-3">Explore</h1>
       <p className="secret-text">new sporting events</p>
       <hr/>

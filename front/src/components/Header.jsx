@@ -12,7 +12,6 @@ function Header(props) {
           <Link to="/newevent" className="btn btn-light btn-lg">New Event</Link>
           <Link to="/profile" className="btn btn-light btn-lg">Profile</Link>  
           <Link to="/myevents" className="btn btn-light btn-lg">My Events</Link>
-          <Link to="/users" className="btn btn-light btn-lg">Users</Link>
           <Link to="/main" className="btn btn-light btn-lg">Main Page</Link>
         </header>
     )
