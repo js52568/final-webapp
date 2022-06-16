@@ -21,7 +21,8 @@ function LogoutButton(props) {
         navigate("/"); */
     }
 
-    return <button className="btn btn-light btn-lg" type="submit" onClick={onClick}>Log Out</button>
+    // return <button className="btn btn-light btn-lg" type="submit" onClick={onClick}>Log Out</button>
+    return <a class="nav-link py-3 px-0 px-lg-3 rounded" onClick={onClick} href="login">Logout</a>;
 }
 
 export default LogoutButton;

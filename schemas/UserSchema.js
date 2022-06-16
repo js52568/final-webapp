@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema({
   friendRequestsIds: [String], 
   cancelationsIds: [String],
   eventsIds: [String],
-  hostedEventsIds: [String]  
+  hostedEventsIds: [String],
+  yearOfBirth: Number
 });
 
 userSchema.plugin(passportLocalMongoose);
