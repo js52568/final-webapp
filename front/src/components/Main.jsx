@@ -9,7 +9,7 @@ function Main() {
     }, []);
 
 
-    return <div class="masthead bg-primary text-white text-center">
+    return <body><div class="masthead bg-primary text-white text-center">
     <div className="container">
     <h1 class="masthead-heading text-uppercase mb-0">Explore</h1>
                 <div class="divider-custom divider-light">
@@ -17,9 +17,41 @@ function Main() {
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-      {events.map((event) => <EventComponent key = {event._id} id={event._id} name={event.name}/>)}
+      {events.map((event) => <EventComponent key = {event._id} id={event._id} description={event.description} name={event.name} 
+      maxParticipants={event.maxParticipants} numOfPart={event.participantsIds.length} host={event.host} startDate={event.startDate}/>)}
     </div>
   </div>
+  <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">
+                            Fakultet Elektrotehnike i Računarstva
+                            <br />
+                            Unska ul. 3, 10000, Zagreb
+                        </p>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">About SportEve</h4>
+                        <p class="lead mb-0">
+                            Free to use app for creating sporting events.
+                            Try it out!
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4">About Me</h4>
+                        <p class="lead mb-0">
+                            A student at FER, I love sports and web development.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright &copy; SportEve 2022</small></div>
+        </div>
+        </body>
     /* return <div class="jumbotron text-center">
     <div className="container">
       <h1 className="display-3">Explore</h1>
