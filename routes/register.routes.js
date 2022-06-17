@@ -22,7 +22,8 @@ router.post("/", function(req,res) {
         } else {
           res.json({status: "200"});
           passport.authenticate("local")(req,res, function(){
-            User.findByIdAndUpdate(req.user.id, { nickname: req.body.nickname },
+            User.findByIdAndUpdate(req.user.id, { nickname: req.body.nickname, fullName: req.body.fullName, description:req.body.description,
+               yearOfBirth: req.body.yearOfBirth },
               function (err, docs) {
                 if (err){
                 //res.json({status: "401"});

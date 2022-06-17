@@ -5,7 +5,7 @@ import InputField from "./InputField";
 function Register(props) {
   let navigate = useNavigate();
 
-  const [registerForm, setRegisterForm] = useState({email: "", password: "", nickname: ""});
+  const [registerForm, setRegisterForm] = useState({email: "", password: "", nickname: "",fullName:"",description:"",yearOfBirth:""});
   const [error, setError] = useState("");
 
   function onChange(event) {
@@ -19,7 +19,10 @@ function Register(props) {
     const data = {
       username: registerForm.email,
       password: registerForm.password,
-      nickname:registerForm.nickname
+      nickname: registerForm.nickname,
+      fullName: registerForm.fullName,
+      description: registerForm.description,
+      yearOfBirth: registerForm.yearOfBirth
     };
     const options = {
       method: 'POST',
@@ -43,8 +46,8 @@ function Register(props) {
   }
 
   function isValid() {
-    const {nickname,email, password} = registerForm;
-    return email.length > 0 && password.length > 0 && nickname.length > 0;
+    const {nickname,yearOfBirth,email,password} = registerForm;
+    return email.length > 0 && password.length > 0 && nickname.length > 0 && yearOfBirth > 0;
   }
 
   return <body>
@@ -74,6 +77,9 @@ function Register(props) {
   
             <form onSubmit={onSubmit}>
               <InputField name="nickname" label="Nickname" type="text" onChange={onChange} value={registerForm.nickname}/>
+              <InputField name="fullName" label="Full name" type="text" onChange={onChange} value={registerForm.fullName}/>
+              <InputField name="description" label="Description" type="text" onChange={onChange} size="100" value={registerForm.description}/>
+              <InputField name="yearOfBirth" label="Year Of Birth" type="number" onChange={onChange} value={registerForm.yearOfBirth}/>
               <div className="form-group">
                 <label for="email">Email</label>
                 <input type="email" className="form-control" name="email" onChange={onChange} value={registerForm.email}/>
