@@ -7,7 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 function NewEvent() {
     let navigate = useNavigate();
-    const [form, setForm] = useState({name:"", sport:"", maxParticipants:1,description:"",startTime:"2022-06-12T19:30",endTime:"2022-06-12T19:30"});
+    const [form, setForm] = useState({name:"", sport:"", maxParticipants:1,description:"",startTime:"2022-06-12T19:30",endTime:"2022-06-12T19:30",locationAddress:""});
     const [error, setError] = useState("");
     const [users,setUsers] = useState([]);
 
@@ -36,7 +36,8 @@ function NewEvent() {
           maxParticipants: form.maxParticipants,
           description: form.description,
           startTime: form.startTime,
-          endTime: form.endTime
+          endTime: form.endTime,
+          locationAddress: form.locationAddress
         };
         const options = {
           method: 'POST',
@@ -73,15 +74,16 @@ function NewEvent() {
                 <InputField name="sport" label="Sport" type="text" onChange={onChange} value={form.sport}/>
                 <InputField name="maxParticipants" label="Max number of participants" type="number" onChange={onChange} value={form.maxParticipants}/>
                 <InputField name="description" label="Description" type="text" onChange={onChange} value={form.description} size="100"/>
+                <InputField name="locationAddress" label="Location(Address)" type="text" onChange={onChange} value={form.locationAddress} size="50"/>
                 <InputField name="startTime" label="Start time" type="datetime-local" onChange={onChange} value={form.startTime}/>
                 <InputField name="endTime" label="End time" type="datetime-local" onChange={onChange} value={form.endTime}/>
-                <Autocomplete
+                {/* <Autocomplete
                   disablePortal
                   id="combo-box-demo"
                   options={labeledUsers || ""}
                   sx={{ width: 300 }}
                   renderInput={(params) => <TextField {...params} label="Add participants" />}
-                />
+                /> */}
               
                 <button type="submit" className="btn btn-dark" disabled={!isValid()}>Create</button>          
             </form>

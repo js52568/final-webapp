@@ -6,6 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import {useNavigate} from "react-router-dom";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PersonIcon from '@mui/icons-material/Person';
 
 function EventComponent(props){
     let navigate = useNavigate();
@@ -14,14 +16,28 @@ function EventComponent(props){
     }
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+      <div>
+        <Card sx={{ maxWidth: 345}}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.name}
+            <hr/>
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {props.description}
+            {props.numOfPart + "/" + props.maxParticipants}
+            <PersonIcon/>
+            <br/>
+            {props.sport}
+            <br/>
+            <LocationOnIcon/>
+            {props.locationAddress}
+            {props.my === true && 
+            <div>
+            <hr/>
+            {props.mine ? <p className="text-uppercase mb-0 greenText">Hosting</p> : <p className="text-uppercase mb-0 redText">Participating</p>}
+            </div>
+            }
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -31,6 +47,8 @@ function EventComponent(props){
         </Button>
       </CardActions>
     </Card>
+    <br/>
+    </div>
     )
     /* return (
         <div>

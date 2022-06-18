@@ -14,6 +14,7 @@ router.post("/", function(req,res) {
         endTime: req.body.endTime,
         host: req.user.id,
         participantsIds: [req.user._id],
+        locationAddress: req.body.locationAddress
     });
     newEvent.save(function(err,event){
         let newId = event._id;

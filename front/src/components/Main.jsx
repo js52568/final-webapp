@@ -17,8 +17,12 @@ function Main() {
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-      {events.map((event) => <EventComponent key = {event._id} id={event._id} description={event.description} name={event.name} 
-      maxParticipants={event.maxParticipants} numOfPart={event.participantsIds.length} host={event.host} startDate={event.startDate}/>)}
+                <div className="grid-container container">
+      {events.map((event) => <EventComponent className="grid-item" key = {event._id} id={event._id} sport={event.sport} name={event.name} 
+      maxParticipants={event.maxParticipants} numOfPart={event.participantsIds.length} host={event.host} startDate={event.startDate}
+      locationAddress={event.locationAddress} my={false}
+      />)}
+      </div>
     </div>
   </div>
   <footer class="footer text-center">

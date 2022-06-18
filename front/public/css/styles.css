@@ -8014,6 +8014,14 @@ textarea.form-control-lg {
     display: inline !important;
   }
 
+  .redText{
+    color: red;
+  }
+
+  .greenText{
+    color: green;
+  }
+
   .d-sm-inline-block {
     display: inline-block !important;
   }
@@ -8024,6 +8032,15 @@ textarea.form-control-lg {
 
   .d-sm-grid {
     display: grid !important;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+  }
+  .grid-item {
+    padding: 20px;
   }
 
   .d-sm-table {
