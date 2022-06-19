@@ -6,6 +6,8 @@ import AddParticipants from "./AddParticipants";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import StarIcon from '@mui/icons-material/Star';
+import PersonIcon from '@mui/icons-material/Person';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 function Event(){
     let navigate = useNavigate();
@@ -176,6 +178,109 @@ function Event(){
 
 
     return ( 
+      <body>
+      <header class="masthead bg-primary">
+      <div>
+      <div className="container">
+        <h1 class="masthead-heading mb-0 text-center text-white">{event.name}</h1>
+        <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+          <br/>
+          <div class="container text-center text-white">
+                <div class="row">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Sport</h4>
+                        <p class="lead mb-0">
+                        {event.sport}
+                        </p>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Information</h4>
+                        <p class="lead mb-0">
+                        {event.description}
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4">Date</h4>
+                        <p class="lead mb-0">
+                            Starting: {event.startTime}
+                            <br/>
+                            Ending: {event.endTime}
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                    <br/>
+                    <hr/>
+                    <br/>
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">
+                            <LocationOnIcon/> {event.locationAddress}
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                    <br/>
+                    <hr/>
+                    <br/>
+                        <h4 class="text-uppercase mb-4">Capacity</h4>
+                        <p class="lead mb-0">
+                        {participants.length}/{event.maxParticipants} <PersonIcon/>
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                    <br/>
+                    <hr/>
+                    <br/>
+                        <h4 class="text-uppercase mb-4">Host</h4>
+                        <p class="lead mb-0">
+                          {participants.filter(part => part._id === event.host).map(part => (
+                            <p onClick={() => toUser(part._id)}>{part.nickname}</p>
+                          ))}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <hr className="text-white"/>
+            <h1 className="text-center text-white">Participants</h1>
+      </div>
+    </div>
+    </header>
+    <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">
+                            Fakultet Elektrotehnike i Računarstva
+                            <br />
+                            Unska ul. 3, 10000, Zagreb
+                        </p>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">About SportEve</h4>
+                        <p class="lead mb-0">
+                            Free to use app for creating sporting events.
+                            Try it out!
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4">About Me</h4>
+                        <p class="lead mb-0">
+                            A student at FER, I love sports and web development.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright &copy; SportEve 2022</small></div>
+        </div>
+    </body>
+    /* return ( 
     <div class="jumbotron centered">
     <div className="container">
       <h1>{event.name}</h1>
@@ -205,7 +310,7 @@ function Event(){
         {role === "not-participating" && <button disabled={isFull()} className="btn btn-light btn-lg" onClick={() => add(user)}>Join</button>}
       
     </div>
-  </div>
+  </div> */
         
           
     )           

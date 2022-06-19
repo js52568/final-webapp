@@ -61,7 +61,38 @@ function NewEvent() {
         return name.length > 0 && sport.length > 0 && maxParticipants > 0 && endTime > startTime;
       }
 
-    return <div className="container mt-5">
+      return <body>
+      <header class="masthead bg-primary">
+      <div className="container mt-5">
+      <h1 class="masthead-heading mb-0 text-white">Create a new event</h1>
+      <br/>
+      <div className="row">
+        <div className="col-sm-8">
+          <div className="card">
+            <div className="card-body">
+    
+              <form onSubmit={onSubmit}>
+                  <InputField name="name" label="Name" type="text" onChange={onChange} value={form.name}/>
+                  <InputField name="sport" label="Sport" type="text" onChange={onChange} value={form.sport}/>
+                  <InputField name="maxParticipants" label="Max number of participants" type="number" onChange={onChange} value={form.maxParticipants}/>
+                  <InputField name="description" label="Description" type="text" onChange={onChange} value={form.description} size="100"/>
+                  <InputField name="locationAddress" label="Location(Address)" type="text" onChange={onChange} value={form.locationAddress} size="50"/>
+                  <InputField name="startTime" label="Start time" type="datetime-local" onChange={onChange} value={form.startTime}/>
+                  <InputField name="endTime" label="End time" type="datetime-local" onChange={onChange} value={form.endTime}/>
+                
+                  <button type="submit" className="btn btn-dark" disabled={!isValid()}>Create</button>          
+              </form>
+              <p>{error}</p>
+    
+            </div>
+          </div>
+        </div>
+        </div>
+    </div> 
+    </header>
+    </body>
+
+    /* return <div className="container mt-5">
     <h1>Create a new event</h1>
   
     <div className="row">
@@ -77,13 +108,6 @@ function NewEvent() {
                 <InputField name="locationAddress" label="Location(Address)" type="text" onChange={onChange} value={form.locationAddress} size="50"/>
                 <InputField name="startTime" label="Start time" type="datetime-local" onChange={onChange} value={form.startTime}/>
                 <InputField name="endTime" label="End time" type="datetime-local" onChange={onChange} value={form.endTime}/>
-                {/* <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={labeledUsers || ""}
-                  sx={{ width: 300 }}
-                  renderInput={(params) => <TextField {...params} label="Add participants" />}
-                /> */}
               
                 <button type="submit" className="btn btn-dark" disabled={!isValid()}>Create</button>          
             </form>
@@ -93,8 +117,16 @@ function NewEvent() {
         </div>
       </div>
       </div>
-  </div>
+  </div> */
 
 }
+
+/* <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={labeledUsers || ""}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => <TextField {...params} label="Add participants" />}
+                /> */
 
 export default NewEvent;
