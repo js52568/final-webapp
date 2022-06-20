@@ -8,6 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import {useNavigate} from "react-router-dom";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from '@mui/icons-material/Person';
+import Box from '@mui/material/Box';
 
 function EventComponent(props){
     let navigate = useNavigate();

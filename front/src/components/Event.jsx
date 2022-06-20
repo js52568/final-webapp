@@ -8,6 +8,13 @@ import AddIcon from '@mui/icons-material/Add';
 import StarIcon from '@mui/icons-material/Star';
 import PersonIcon from '@mui/icons-material/Person';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Box from '@mui/material/Box';
+
 
 function Event(){
     let navigate = useNavigate();
@@ -206,9 +213,9 @@ function Event(){
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">Date</h4>
                         <p class="lead mb-0">
-                            Starting: {event.startTime}
+                            Starting: {event.startTime!== undefined && event.startTime.substring(0, event.startTime.length - 8).replace("T"," ")}
                             <br/>
-                            Ending: {event.endTime}
+                            Ending: {event.endTime!== undefined && event.endTime.substring(0, event.startTime.length - 8).replace("T"," ")}
                         </p>
                     </div>
                     <div class="col-lg-4">
@@ -246,6 +253,50 @@ function Event(){
             <br/>
             <hr className="text-white"/>
             <h1 className="text-center text-white">Participants</h1>
+            <br/>
+            <Box
+            display="flex"
+            justifyContent="center"
+          >                 
+            <List
+      sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+      aria-label="contacts"
+    >
+        {participants.map((part) => 
+          <ListItem disablePadding>
+        <ListItemButton >
+          <ListItemText primary={part.nickname} onClick={() => toUser(part._id)}/>
+          {event.host === part._id && <ListItemIcon>
+            <StarIcon />
+          </ListItemIcon>}
+          {(role === "host" && event.host !== part._id) && <ListItemIcon><DeleteIcon onClick={() => removePart(part._id)} />
+          </ListItemIcon>}
+        </ListItemButton>
+      </ListItem>
+      )}
+    </List>
+    </Box>
+    <br/>
+    <Box
+            display="flex"
+            justifyContent="center"
+          >
+    {(role === "host" && addParticipants === false) && 
+        <button className="btn btn-light btn-lg" onClick={addParticipant} disabled={!isValidTry()}>Add participants</button>}        
+        {addParticipants === true &&      
+        <AddParticipants users={getLabels()} isValid={(nick) => isValidAdd(nick)} cancelAdd={cancelAdd} onClick={(nick) => add(nick)}/>
+        }
+        </Box>
+        <br/>
+        <hr className="text-white"/>
+        <Box
+            display="flex"
+            justifyContent="center"
+          >
+        {role === "host" && <button className="btn btn-light btn-lg" onClick={cancelEvent}>Cancel event</button>} 
+        {role === "participant" && <button className="btn btn-light btn-lg" onClick={() => removePart(user._id)}>Cancel</button>}
+        {role === "not-participating" && <button disabled={isFull()} className="btn btn-light btn-lg" onClick={() => add(user)}>Join</button>}
+        </Box>
       </div>
     </div>
     </header>

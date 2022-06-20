@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import EventComponent from "./EventComponent";
+import Box from '@mui/material/Box';
 
 function Main() {
   const [events,setEvents] = useState([]);
@@ -22,7 +23,9 @@ function Main() {
       maxParticipants={event.maxParticipants} numOfPart={event.participantsIds.length} host={event.host} startDate={event.startDate}
       locationAddress={event.locationAddress} my={false}
       />)}
+      
       </div>
+      
     </div>
   </div>
   <footer class="footer text-center">

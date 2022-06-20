@@ -9,7 +9,7 @@ function Users(props){
     }, []);
 
     
-
+    
     return <div>
     <h1>Users</h1>
     {users.map((user) => <UserComponent key = {user._id} id={user._id} nickname={user.nickname}/>)}
