@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 function User(){
     const [user,setUser] = useState({nickname:"", _id: ""});
     const [currUser, setCurrUser] = useState({});
+    const [rating, setRating] = React.useState(5);
+    const [wasRated,setWasRated] = useState("false");
+    const [average,setAverage] = useState("");
     //const [currId,setCurrId] = useState("");
 
     
@@ -19,6 +24,37 @@ function User(){
     useEffect(() => {        
         fetch("/profile").then(data => data.json()).then(currUser => setCurrUser(currUser))       
     }, []);
+
+    useEffect(() => {        
+        fetch(myUrl + "/rate").then(data => data.json()).then(wasRated => setWasRated(wasRated.wasRated))       
+    }, []);
+
+    useEffect(() => {        
+        fetch(myUrl + "/ratings").then(data => data.json()).then(average => setAverage(average.rat))       
+    }, []);
+
+    function rate(e){
+        e.preventDefault();
+        const data = {
+            reviewerId: currUser._id,
+            userId: user._id,
+            value: rating
+          };
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          };
+          fetch(myUrl + "/rate", options).then(res => {
+            if (res.status === 200) {
+              console.log("rated")
+            } else {
+              console.log("Error rating");
+            }
+          });
+    }
 
     return  <body>
       <header class="masthead bg-primary">
@@ -73,19 +109,34 @@ function User(){
                     <br/>
                         <h4 class="text-uppercase mb-4">Rating</h4>
                         <p class="lead mb-0">
-                          
+                        {average}
                         </p>
                     </div>
                 </div>
             </div>
             <br/>
             <hr className="text-white"/>
-            {user._id !== currUser._id && <Box
+            {user._id !== currUser._id && wasRated === "false" && <div className="container"><Box
             display="flex"
             justifyContent="center"
           >
-            <button className="btn btn-light btn-lg" type="submit" >Rate</button>
-            </Box> }       
+      <Rating
+        name="simple-controlled"
+        value={rating}
+        onChange={(event, newValue) => {
+          setRating(newValue);
+        }}
+      />
+      </Box>
+      <br/>
+      <Box
+            display="flex"
+            justifyContent="center"
+          >
+            <button className="btn btn-light btn-lg" type="submit" onClick={rate}>Rate</button>
+            </Box>
+            </div>
+           }       
                 
                 
             </div>

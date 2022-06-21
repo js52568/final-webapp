@@ -20,7 +20,23 @@ router.post("/edit", function(req,res) {
         res.status(403).json("403");
     }
     else{
-        res.json({status: "200"});
+        User.findByIdAndUpdate(req.user.id, { fullName: req.body.fullName },
+            function (err, docs) {
+        if (err){
+        res.status(403).json("403");
+        }
+        else{
+            User.findByIdAndUpdate(req.user.id, { description: req.body.description },
+                function (err, docs) {
+            if (err){
+            res.status(403).json("403");
+            }
+            else{
+            res.json({status: "200"});
+            }
+            });
+        }
+        });
     }
 });
 });
