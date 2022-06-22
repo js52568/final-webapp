@@ -8037,10 +8037,10 @@ textarea.form-control-lg {
   .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
-    padding: 10px;
+    padding: 1px;
   }
   .grid-item {
-    padding: 20px;
+    padding: 1px;
   }
 
   .d-sm-table {

@@ -34,21 +34,28 @@ router.get("/:id/ratings", function(req,res){
     User.findOne({_id: req.params.id}, function(err,foundUser){
         if (foundUser) {
             ratingIds = foundUser.ratingIds;
+            console.log(foundUser.ratingIds);
             if (ratingIds.length === 0) {
-                console.log("tu sam");
                 res.json({rat: "No ratings"});
             }
             else {
-                Rating.find({_id: { $in: ratingIds }}, function(err,foundRatings){
+                Rating.find( function(err,foundRatings){
+                console.log(foundUser.ratingIds);
                 let values = [];
-                foundRatings.map(rating => values.push(rating.value));
+                for (i=0;i<foundRatings.length;i++) {
+                    if (foundUser.ratingIds.includes(foundRatings[i]._id)){
+                        values.push(foundRatings[i].value);
+                    }
+                }
+                console.log(values);
+                /* let values = [];
+                newArray.map(rating => values.push(rating.value)); */
                 let sum = 0;
                 for (i = 0;i<values.length;i++) {
                     sum = sum + values[i];
                 }
                 let average = sum/values.length;
                 let rounded = Math.round(average * 10) / 10
-                console.log(rounded);
                 res.json({rat: rounded});
             })}
             
@@ -57,6 +64,7 @@ router.get("/:id/ratings", function(req,res){
         }
     })
 })
+//{_id: { $in: ratingIds }},
 
 router.post("/:id/rate", function(req,res){
     const newRating = new Rating({

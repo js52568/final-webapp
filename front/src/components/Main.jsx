@@ -18,6 +18,10 @@ function Main() {
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
+                <Box
+            display="flex"
+            justifyContent="center"
+          >
                 <div className="grid-container container">
       {events.map((event) => <EventComponent className="grid-item" key = {event._id} id={event._id} sport={event.sport} name={event.name} 
       maxParticipants={event.maxParticipants} numOfPart={event.participantsIds.length} host={event.host} startDate={event.startDate}
@@ -25,6 +29,7 @@ function Main() {
       />)}
       
       </div>
+      </Box>
       
     </div>
   </div>
