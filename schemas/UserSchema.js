@@ -9,12 +9,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   googleId: String,
   description: String,
-  picture: String,
-  friendsIds: [String],
-  invitationsIds: [String],    
   ratingIds: [String],        
-  friendRequestsIds: [String], 
-  cancelationsIds: [String],
   eventsIds: [String],
   hostedEventsIds: [String],
   yearOfBirth: Number
@@ -26,3 +21,9 @@ userSchema.plugin(findOrCreate);
 const User = new mongoose.model("User",userSchema);
 
 module.exports = User;
+
+/* picture: String,
+  friendsIds: [String],
+  invitationsIds: [String], 
+  friendRequestsIds: [String], 
+  cancelationsIds: [String], */
